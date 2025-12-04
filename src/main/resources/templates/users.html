@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User List</title>
+</head>
+<body>
+
+<h2>Users</h2>
+<a href="/users/add">Add New User</a>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Cards</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.email}"></td>
+
+        <td>
+            <ul>
+                <li th:each="card : ${user.cards}">
+                    <span th:text="${card.type} + ' - ' + ${card.cardNumber}"></span>
+                    (<a th:href="@{'/transactions/add/' + ${card.id}}">Transaction</a>)
+                </li>
+            </ul>
+        </td>
+
+        <td>
+            <a th:href="@{'/cards/add/' + ${user.id}}">Add Card</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
