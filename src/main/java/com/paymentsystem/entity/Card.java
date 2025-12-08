@@ -25,7 +25,7 @@ public class Card {
     private Long id;
 
     private String cardNumber;
-    private String type; // "DEBIT" or "CREDIT"
+    private String type;
     private double balance;
 
     @ManyToOne

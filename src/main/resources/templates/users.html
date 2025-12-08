@@ -2,40 +2,49 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>User List</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-<h2>Users</h2>
-<a href="/users/add">Add New User</a>
+<div class="container">
 
-<table border="1" cellpadding="10">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Cards</th>
-        <th>Actions</th>
-    </tr>
+    <h2>Users</h2>
 
-    <tr th:each="user : ${users}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.name}"></td>
-        <td th:text="${user.email}"></td>
+    <!-- ADD USER BUTTON (CENTERED) -->
+    <div style="text-align: center; margin-bottom: 20px;">
+        <a href="/users/add" class="btn-main">➕ Add New User</a>
+    </div>
 
-        <td>
-            <ul>
-                <li th:each="card : ${user.cards}">
-                    <span th:text="${card.type} + ' - ' + ${card.cardNumber}"></span>
-                    (<a th:href="@{'/transactions/add/' + ${card.id}}">Transaction</a>)
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Cards</th>
+            <th>Actions</th>
+        </tr>
+
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.email}"></td>
+
+            <td>
+                <ul>
+                    <li th:each="card : ${user.cards}">
+                        <span th:text="${card.type} + ' - ' + ${card.cardNumber}"></span>
+                        (<a th:href="@{'/transactions/add/' + ${card.id}}">Transaction</a>)
                 </li>
-            </ul>
-        </td>
+                </ul>
+            </td>
 
-        <td>
-            <a th:href="@{'/cards/add/' + ${user.id}}">Add Card</a>
-        </td>
-    </tr>
-</table>
+            <td>
+                <a th:href="@{'/cards/add/' + ${user.id}}">Add Card</a>
+            </td>
+        </tr>
+    </table>
+
+</div>
 
 </body>
 </html>
